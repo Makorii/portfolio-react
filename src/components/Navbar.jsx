@@ -14,11 +14,13 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 240;
-const navItems = ['Home', 'Knowledge', 'Projects', 'Contact'];
+const navItems = ['home', 'knowledge', 'projects', 'contact'];
 
 function Navbar(props) {
+  const navigate = useNavigate()
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -35,7 +37,7 @@ function Navbar(props) {
       <List>
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }}>
+            <ListItemButton sx={{ textAlign: 'center' }} onClick={() => navigate(`/${item}`)}>
               <ListItemText primary={item} />
             </ListItemButton>
           </ListItem>
