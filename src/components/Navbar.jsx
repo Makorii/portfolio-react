@@ -28,8 +28,12 @@ function Navbar(props) {
     setMobileOpen((prevState) => !prevState);
   };
 
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+  }
+
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center', backgroundColor:"#f1dffa", height:"100%" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
         Menu
       </Typography>
@@ -38,7 +42,7 @@ function Navbar(props) {
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }} onClick={() => navigate(`/${item}`)}>
-              <ListItemText primary={item} />
+              <ListItemText primary={capitalizeFirstLetter(item)}/>
             </ListItemButton>
           </ListItem>
         ))}
@@ -51,7 +55,7 @@ function Navbar(props) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar component="nav">
+      <AppBar component="nav" sx={{backgroundColor:"#a242f5"}}>
         <Toolbar sx={{justifyContent:{
           sm : 'center',
           md : 'flex-end',
@@ -67,7 +71,7 @@ function Navbar(props) {
           </IconButton>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: '#fff' }}>
+              <Button key={item} sx={{ color: '#fff' }} onClick={() => navigate(`/${item}`)}>
                 {item}
               </Button>
             ))}
@@ -81,7 +85,7 @@ function Navbar(props) {
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true,
           }}
           sx={{
             display: { xs: 'block', sm: 'none' },
